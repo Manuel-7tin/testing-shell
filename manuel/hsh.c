@@ -24,20 +24,11 @@ int main(int argc __attribute__((unused)),
 		print_prompt();
 		m = readline(&string, stdin);
 		if (m == -1)
-		{
-			printf("error man");
 			return (1);
-		}
 		if (string == NULL)
-		{
-			printf("ode");
 			return (1);
-		}
 		if (str_cmp(strtok(string, "\n"), "exit", 4) == 0)
-		{
-			printf("why why why");
 			return (0);
-		}
 		cmd = malloc(30 * sizeof(char));
 		m = locate_path(env, cmd, strtok(string, " "));
 		if (m == 0)
