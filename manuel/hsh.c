@@ -16,22 +16,29 @@ int main(int argc __attribute__((unused)),
 		char **argv,
 		char **env)
 {
-	char *string = NULL;
-	int m;
+	while (1)
+	{
+		char *string = NULL, *cmd;
+		int m;
 
-	print_prompt();
-	m = readline(&string, stdin);
-	if (m == -1)
-	{
-		printf("error man");
-		return (1);
+		print_prompt();
+		m = readline(&string, stdin);
+		if (m == -1)
+		{
+			printf("error man");
+			return (1);
+		}
+		if (string == NULL)
+		{
+			printf("ode");
+			return (1);
+		}
+		cmd = malloc(30 * sizeof(char));
+		m = locate_path(env, cmd, strtok(string, " "));
+		if (m == 0)
+			ex_string(env, string);
+		free(cmd);
+		free(string);
+		return (0);
 	}
-	if (string == NULL)
-	{
-		printf("ode");
-		return (1);
-	}
-	printf("I guess it worked: : : YOu tyPeD %s\n", string);
-	free(string);
-	return (0);
 }

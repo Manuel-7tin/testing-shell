@@ -13,6 +13,8 @@ int path_gen(char **env, char **path_arr);
 char *_strcpy(char *dest, const char *src);
 int _strcat(char *string1, char *addition, char *final_string);
 int locate_path(char **env, char *cmd_path, char *cmd);
+void ex_string(char **env, char *string);
+char *_strt(char *string, const char *deli);
 
 #define MAX_PATHS 7
 #endif /*SHELL_H*/
