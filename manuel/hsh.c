@@ -33,12 +33,16 @@ int main(int argc __attribute__((unused)),
 			printf("ode");
 			return (1);
 		}
+		if (str_cmp(strtok(string, "\n"), "exit", 4) == 0)
+		{
+			printf("why why why");
+			return (0);
+		}
 		cmd = malloc(30 * sizeof(char));
 		m = locate_path(env, cmd, strtok(string, " "));
 		if (m == 0)
 			ex_string(env, string);
 		free(cmd);
 		free(string);
-		return (0);
 	}
 }

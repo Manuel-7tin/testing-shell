@@ -132,10 +132,7 @@ int locate_path(char **env, char *cmd_path, char *cmd)
 		free(path_arr[i]);
 	free(path_arr);
 	if (n == -1)
-	{
-		free(temp_path);
 		return (-3);
-	}
 	_strcpy(cmd_path, temp_path);
 	free(temp_path);
 	return (0);
