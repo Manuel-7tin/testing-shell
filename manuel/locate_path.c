@@ -88,6 +88,8 @@ int locate_path(char **env, char *cmd_path, char *cmd)
 	char **path_arr, *temp_path;
 	struct stat file_stat;
 
+	if (env == NULL || cmd == NULL || cmd_path == NULL)
+		return (-1);
 	path_arr = malloc(MAX_PATHS * sizeof(char *));
 	if (path_arr == NULL)
 		return (-1);

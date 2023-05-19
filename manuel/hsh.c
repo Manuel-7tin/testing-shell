@@ -25,8 +25,8 @@ int main(int argc __attribute__((unused)),
 		m = readline(&string, stdin);
 		if (m == -1)
 			return (1);
-		if (string == NULL)
-			return (1);
+		/**if (string == NULL)
+			return (1);**/
 		if (str_cmp(strtok(string, "\n"), "exit", 4) == 0)
 			return (0);
 		cmd = malloc(30 * sizeof(char));
