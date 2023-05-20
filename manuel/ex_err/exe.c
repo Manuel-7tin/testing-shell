@@ -14,7 +14,7 @@ void ex_string(char **env, char *string)
 	int i, status, args_count = 0;
 	char **args = malloc(4 * sizeof(char *));
 	char *path, *token;
-	pid_t pids = fork();
+	pid_t pids;
 
 	path = malloc(30 * sizeof(char));
 	if (args == NULL || path == NULL)
@@ -40,7 +40,7 @@ void ex_string(char **env, char *string)
 		}
 		printf("arg_string %i is %s\n", i, args[i]);
 	}
-
+	pids = fork();
 	if (pids < 0)
 	{
 		perror("fork");

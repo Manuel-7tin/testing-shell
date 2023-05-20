@@ -84,7 +84,7 @@ int path_gen(char **env, char **path_arr)
 
 int locate_path(char **env, char *cmd_path, char *cmd)
 {
-	int i, n, num_of_path, path_length;
+	int i, n, num_of_path;
 	char **path_arr, *temp_path;
 	struct stat file_stat;
 
@@ -95,8 +95,7 @@ int locate_path(char **env, char *cmd_path, char *cmd)
 		return (-1);
 	for (i = 0; i < MAX_PATHS; i++)
 	{
-		path_length = strlen(env[i]) + 1;
-		path_arr[i] = malloc(path_length * sizeof(char));
+		path_arr[i] = malloc(20 * sizeof(char));
 		if (path_arr[i] == NULL)
 		{
 			for (; i >= 0; i--)
