@@ -1,11 +1,20 @@
 #include "shell.h"
 
+/**
+ * ex_string - Executes a given comand
+ *
+ * @env: Environmental variable
+ * @string: a string of the command and it's arguments
+ *
+ * Return: void
+ */
+
 void ex_string(char **env, char *string)
 {
 	int i, status, args_count = 0;
-	char **args = malloc(4 * sizeof(char *));
+	char **args = malloc(MAX_STRING_LEN * sizeof(char *));
 	char *path, *token;
-	pid_t pids = fork();
+	pid_t pids;
 
 	path = malloc(30 * sizeof(char));
 	if (args == NULL || path == NULL)
@@ -18,10 +27,10 @@ void ex_string(char **env, char *string)
 	while (token != NULL)
 	{
 		args[args_count++] = token;
-		token = _strt(NULL, " ");
+		token = strtok(NULL, " ");
 	}
 	args[args_count] = NULL;
-
+	pids = fork();
 	if (pids < 0)
 	{
 		perror("fork");

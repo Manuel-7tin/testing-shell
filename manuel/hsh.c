@@ -18,22 +18,31 @@ int main(int argc __attribute__((unused)),
 {
 	while (1)
 	{
-		char *string = NULL, *cmd;
-		int m;
+		char *string = NULL, *cmd = NULL, *unknown_cmd = NULL;
+		int n, m = -1;
 
 		print_prompt();
-		m = readline(&string, stdin);
-		if (m == -1)
+		/*string = malloc(30);*/
+		n = readline(&string, stdin);
+		if (n == -1)
+		{
+			free(string);
 			return (1);
-		/**if (string == NULL)
-			return (1);**/
-		if (str_cmp(strtok(string, "\n"), "exit", 4) == 0)
+		}
+		if (str_cmp(string, "exit", 4) == 0)
+		{
+			free(string);
 			return (0);
+		}
 		cmd = malloc(30 * sizeof(char));
-		m = locate_path(env, cmd, strtok(string, " "));
+		unknown_cmd = malloc(20 * sizeof(char));
+		n = get_cmd(string, unknown_cmd);
+		if (n == 0)
+			m = locate_path(env, cmd, unknown_cmd);
 		if (m == 0)
 			ex_string(env, string);
-		free(cmd);
 		free(string);
+		free(cmd);
+		free(unknown_cmd);
 	}
 }
