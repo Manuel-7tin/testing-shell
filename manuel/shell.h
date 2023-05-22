@@ -15,6 +15,8 @@ int _strcat(char *string1, char *addition, char *final_string);
 int locate_path(char **env, char *cmd_path, char *cmd);
 void ex_string(char **env, char *string);
 char *_strt(char *string, const char *deli);
+int get_cmd(char *string, char *cmd);
 
 #define MAX_PATHS 7
+#define MAX_STRING_LEN 2048
 #endif /*SHELL_H*/

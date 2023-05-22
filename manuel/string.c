@@ -49,3 +49,27 @@ int _strcat(char *string1, char *addition, char *final_string)
 	*ptr = '\0';
 	return (0);
 }
+
+/**
+ * get_cmd - Gets the users command
+ *
+ * @string: The string to extract the command from
+ *
+ * Return: int 0 on success, -1 on failure
+ */
+
+int get_cmd(char *string, char *cmd)
+{
+	char *token, *words = NULL;
+
+	if (string == NULL)
+		return (-1);
+	words = malloc(50 * sizeof(char));
+	if (words == NULL)
+		return (-1);
+	_strcpy(words, string);
+	token = strtok(words, " ");
+	_strcpy(cmd, token);
+	free(words);
+	return (0);
+}
