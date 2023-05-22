@@ -26,7 +26,6 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 		if (m == -1)
 		{
 			write(STDIN_FILENO, "\n", 1);
-			free(cmd);
 			free(string);
 			return (0);
 		}
