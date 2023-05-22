@@ -28,8 +28,8 @@ int readline(char **str, FILE *stream)
 	size_t input_size;
 
 	char_num = getline(str, &input_size, stream);
-	if (char_num == -1)
-		return (-1);
+	if (str == NULL)
+		return (-5);
 	*str = strtok(*str, "\n");
 	return (char_num);
 }
