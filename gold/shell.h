@@ -15,6 +15,7 @@ int _strcat(char *string1, char *addition, char *final_string);
 void ex_string(char **env, char *string, int *command_count);
 int locate_path(char **env, char *cmd_path, char *cmd, int* command_count);
 void _itoa(int value, char *str);
+void handle_signal(int signal);
 char *_strt(char *string, const char *deli);
 
 #define MAX_PATHS 10

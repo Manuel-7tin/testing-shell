@@ -15,6 +15,7 @@ int main(int argc __attribute__((unused)), char **argv, char **env)
 {
 	int command_count = 1;
 
+	signal(SIGINT, handle_signal);
 	while (1)
 	{
 		char *string = NULL, *cmd, *token;
