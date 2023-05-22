@@ -56,13 +56,13 @@ void ex_string(char **env, char *string, int *command_count)
 		{
 			free(path);
 			free(args);
-			exit(EXIT_FAILURE);
+			exit(EXIT_SUCCESS);
 		}
 		execve(path, args, env);
 				perror("execve");
 				free(path);
 				free(args);
-				exit(EXIT_FAILURE);
+				exit(EXIT_SUCCESS);
 	}
 	else
 	{
