@@ -12,10 +12,12 @@ int str_cmp(char *str1, char *str2, size_t len);
 int path_gen(char **env, char **path_arr);
 char *_strcpy(char *dest, const char *src);
 int _strcat(char *string1, char *addition, char *final_string);
-int locate_path(char **env, char *cmd_path, char *cmd);
-void ex_string(char **env, char *string);
+int locate_path(char **env, char *cmd_path, char *cmd, int* command_count);
+void ex_string(char **env, char *string, int* command_count);
 char *_strt(char *string, const char *deli);
 int get_cmd(char *string, char *cmd);
+void handle_signal(int signal);
+void _itoa(int value, char *str);
 
 #define MAX_PATHS 7
 #define MAX_STRING_LEN 2048

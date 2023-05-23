@@ -78,15 +78,17 @@ int path_gen(char **env, char **path_arr)
  * @env: An array of strings of environment variables
  * @cmd_path: A pointer to a loation to store the path
  * @cmd: The command
+ * @command_count: The number of commands thst has been called
  *
  * Return: (int): 0 if successful, -1 if not, -3 if path can't be located
  */
 
-int locate_path(char **env, char *cmd_path, char *cmd)
+int locate_path(char **env, char *cmd_path, char *cmd, int* command_count)
 {
 	int i, n, num_of_path;
 	char **path_arr, *temp_path;
 	struct stat file_stat;
+	char error_msg[50], count_str[10];
 
 	if (env == NULL || cmd == NULL || cmd_path == NULL)
 		return (-1);
@@ -127,15 +129,62 @@ int locate_path(char **env, char *cmd_path, char *cmd)
 		n = stat(temp_path, &file_stat);
 		if (n == 0)
 			break;
-		else
-			free(temp_path);
+		free(temp_path);
 	}
 	for (i = 0; i < MAX_PATHS; i++)
 		free(path_arr[i]);
 	free(path_arr);
 	if (n == -1)
-		return (-3);
+	{
+        	_itoa(*command_count, count_str);
+        	strcpy(error_msg, "./hsh: ");
+        	strcat(error_msg, count_str);
+        	strcat(error_msg, ": ");
+        	strcat(error_msg, cmd);
+        	strcat(error_msg, ": not found\n");
+        	write(STDERR_FILENO, error_msg, strlen(error_msg));
+        	return (-1);
+	}
 	_strcpy(cmd_path, temp_path);
 	free(temp_path);
 	return (0);
+}
+
+/**
+ * _itoa - convert an integer to a string representation
+ * @value: The integer
+ * @str: the array to store the string
+ */
+void _itoa(int value, char *str)
+{
+	int i = 0;
+	int sign = 0;
+	int end, start;
+	char temp;
+
+	if (value < 0)
+	{
+		sign = 1;
+		value = -value;
+	}
+	do {
+		str[i++] = value % 10 + '0';
+		value /= 10;
+	}
+
+	while (value > 0);
+	if (sign)
+		str[i++] = '-';
+	str[i] = '\0';
+
+	start = sign;
+	end = i - 1;
+	while (start < end)
+	{
+		temp = str[start];
+		str[start] = str[end];
+		str[end] = temp;
+		start++;
+		end--;
+	}
 }

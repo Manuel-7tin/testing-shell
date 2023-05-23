@@ -9,7 +9,7 @@
  * Return: void
  */
 
-void ex_string(char **env, char *string)
+void ex_string(char **env, char *string, int* command_count)
 {
 	int i, status, args_count = 0;
 	char **args = malloc(MAX_STRING_LEN * sizeof(char *));
@@ -40,8 +40,8 @@ void ex_string(char **env, char *string)
 	}
 	else if (pids == 0)
 	{
-		i = locate_path(env, path, args[0]);
-		if (i == -3)
+		i = locate_path(env, path, args[0], command_count);
+		if (i == -1)
 		{
 			perror("./hsh");
 			free(path);
@@ -52,7 +52,7 @@ void ex_string(char **env, char *string)
 		perror("execve");
 		free(path);
 		free(args);
-		return;
+		exit(EXIT_FAILURE);
 	}
 	else
 	{

@@ -26,20 +26,18 @@ int readline(char **str, FILE *stream)
 {
 	int char_num;
 	size_t input_size;
-	char *temp_str = NULL, *token;
+	char *temp_str = NULL, *token = NULL;
 
 	char_num = getline(&temp_str, &input_size, stream);
-	if (char_num == -1)
-		return (-1);
-	/**str = strtok(temp_str, "\n");*/
-	token = strtok(temp_str, "\n");
+	if (temp_str == NULL)
+		return (-5);
+	if (char_num != -1)
+		token = strtok(temp_str, "\n");
 	if (token != NULL)
 	{
 		*str = malloc(30);
 		_strcpy(*str, token);
 	}
-	/*else
-		*str = token;*/
 	free(temp_str);
 	return (char_num);
 }

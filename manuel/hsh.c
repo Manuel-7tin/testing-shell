@@ -16,18 +16,21 @@ int main(int argc __attribute__((unused)),
 		char **argv,
 		char **env)
 {
+	int command_count = 1;
+
+	signal(SIGINT, handle_signal);
 	while (1)
 	{
 		char *string = NULL, *cmd = NULL, *unknown_cmd = NULL;
 		int n, m = -1;
 
 		print_prompt();
-		/*string = malloc(30);*/
 		n = readline(&string, stdin);
 		if (n == -1)
 		{
+			write(STDIN_FILENO, "\n", 1);
 			free(string);
-			return (1);
+			return (0);
 		}
 		if (str_cmp(string, "exit", 4) == 0)
 		{
@@ -38,11 +41,13 @@ int main(int argc __attribute__((unused)),
 		unknown_cmd = malloc(20 * sizeof(char));
 		n = get_cmd(string, unknown_cmd);
 		if (n == 0)
-			m = locate_path(env, cmd, unknown_cmd);
+			m = locate_path(env, cmd, unknown_cmd, &command_count);
 		if (m == 0)
-			ex_string(env, string);
+			ex_string(env, string, &command_count);
 		free(string);
 		free(cmd);
 		free(unknown_cmd);
+		command_count++;
 	}
+	return (0);
 }
