@@ -78,3 +78,51 @@ int get_cmd(char *string, char *cmd)
 	free(words);
 	return (0);
 }
+/**
+ * _strlen - Returns length of a string
+ * @str: A pointer to a char string
+ * Return: length
+ */
+
+size_t _strlen(const char *str)
+{
+	const char *ptr;
+
+	if (str == NULL)
+	{
+		return (0);
+	}
+	ptr = str;
+	while (*ptr != '\0')
+	{
+		ptr++;
+	}
+	return ((size_t)(ptr - str));
+
+}
+/**
+ * __strcat - Custom strcat function
+ * @dest: destination string
+ * @src: source string
+ * return: dest
+ */
+char *__strcat(char *dest, const char *src)
+{
+	char *ptr = dest;
+
+	if (dest == NULL || src == NULL)
+	{
+		return (dest);
+	}
+	while (*ptr != '\0')
+	{
+		ptr++;
+	}
+	while (*src != '\0')
+	{
+		*ptr++ = *src++;
+	}
+	*ptr = '\0';
+
+	return (dest);
+}

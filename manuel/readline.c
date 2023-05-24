@@ -8,9 +8,12 @@
 
 void print_prompt(void)
 {
+	if (isatty(STDIN_FILENO))
+	{
 	char *prompt = "$ ";
 
 	write(STDOUT_FILENO, prompt, strlen(prompt));
+	}
 }
 
 /**
