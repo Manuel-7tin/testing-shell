@@ -16,7 +16,7 @@ int str_cmp(char *str1, char *str2, size_t len)
 
 	if (str1 == NULL || str2 == NULL)
 		return (-1);
-	if (strlen(str1) < len || strlen(str2) < len)
+	if (_strlen(str1) < len || _strlen(str2) < len)
 		return (-1);
 	for (i = 0; i < len; i++)
 	{
@@ -59,14 +59,14 @@ int path_gen(char **env, char **path_arr)
 		return (-1);
 	if (paths == NULL)
 		return (-1);
-	path = strtok(paths, ":");
+	path = _strt(paths, ":");
 	for (n = 0; path; n++)
 	{
 		_strcpy(path_arr[n], path);
-		m = strlen(path_arr[n]);
+		m = _strlen(path_arr[n]);
 		path_arr[n][m++] = '/';
 		path_arr[n][m] = '\0';
-		path = strtok(NULL, ":");
+		path = _strt(NULL, ":");
 	}
 	free(paths);
 	return (n);
@@ -142,12 +142,12 @@ int locate_path(char **env, char *cmd_path, char *cmd, int* command_count)
 	if (n == -1)
 	{
         	_itoa(*command_count, count_str);
-        	strcpy(error_msg, "./hsh: ");
-        	strcat(error_msg, count_str);
-        	strcat(error_msg, ": ");
-        	strcat(error_msg, cmd);
-        	strcat(error_msg, ": not found\n");
-        	write(STDERR_FILENO, error_msg, strlen(error_msg));
+        	_strcpy(error_msg, "./hsh: ");
+        	__strcat(error_msg, count_str);
+        	__strcat(error_msg, ": ");
+        	__strcat(error_msg, cmd);
+        	__strcat(error_msg, ": not found\n");
+        	write(STDERR_FILENO, error_msg, _strlen(error_msg));
         	return (-1);
 	}
 	_strcpy(cmd_path, temp_path);

@@ -18,6 +18,8 @@ int main(int argc __attribute__((unused)),
 {
 	int command_count = 1;
 
+	(void)argv;
+
 	signal(SIGINT, handle_signal);
 	while (1)
 	{
