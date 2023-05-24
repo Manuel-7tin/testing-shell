@@ -24,7 +24,8 @@ int main(int argc __attribute__((unused)),
 		char *string = NULL, *cmd = NULL, *unknown_cmd = NULL;
 		int n, m = -1;
 
-		print_prompt();
+		if (isatty(STDIN_FILENO))
+			print_prompt();
 		n = readline(&string, stdin);
 		if (n == -1)
 		{
