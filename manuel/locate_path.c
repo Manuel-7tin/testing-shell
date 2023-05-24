@@ -90,6 +90,11 @@ int locate_path(char **env, char *cmd_path, char *cmd, int* command_count)
 	struct stat file_stat;
 	char error_msg[50], count_str[10];
 
+	if (stat(cmd, &file_stat) == 0)
+	{
+		_strcpy(cmd_path, cmd);
+		return (0);
+	}
 	if (env == NULL || cmd == NULL || cmd_path == NULL)
 		return (-1);
 	path_arr = malloc(MAX_PATHS * sizeof(char *));
