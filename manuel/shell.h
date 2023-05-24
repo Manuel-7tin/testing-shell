@@ -9,6 +9,8 @@
 void print_prompt(void);
 int readline(char **str, FILE *stream);
 int str_cmp(char *str1, char *str2, size_t len);
+size_t _strlen(const char *str);
+char *__strcat(char *dest, const char *src);
 int path_gen(char **env, char **path_arr);
 char *_strcpy(char *dest, const char *src);
 int _strcat(char *string1, char *addition, char *final_string);
