@@ -31,15 +31,12 @@ void ex_string(char **env, char *string, int *command_count)
 	}
 	args[args_count] = NULL;
 
-	printf("args count sef na %i\n", args_count);
 	for (i = 0; i <= args_count; i++)
 	{
 		if (args[i] == NULL)
 		{
-			printf("NULL is here");
 			break;
 		}
-		printf("args_string %i is %s\n", i, args[i]);
 	}
 	pids = fork();
 	if (pids < 0)

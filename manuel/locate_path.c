@@ -95,7 +95,7 @@ int locate_path(char **env, char *cmd_path, char *cmd, int* command_count)
 		_strcpy(cmd_path, cmd);
 		return (0);
 	}
-	if (env == NULL || cmd == NULL || cmd_path == NULL)
+	if (env == NULL || cmd == NULL || cmd_path == NULL || command_count == NULL)
 		return (-1);
 	path_arr = malloc(MAX_PATHS * sizeof(char *));
 	if (path_arr == NULL)

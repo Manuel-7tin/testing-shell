@@ -1,25 +1,5 @@
 #include "shell.h"
 
-int get_cmd(char *string, char *cmd)
-{
-	char *token = NULL, *words = NULL;
-
-	if (string == NULL)
-		return (-1);
-	words = malloc(50 * sizeof(char));
-	if (words == NULL)
-		return (-1);
-	_strcpy(words, string);
-	token = _strt(words, " ");
-	if (token == NULL)
-	{
-		free(words);
-		return (-1);
-	}
-	_strcpy(cmd, token);
-	free(words);
-	return (0);
-}
 /**
 * _strcpy - custom strcpy function
 *
@@ -69,11 +49,41 @@ int _strcat(char *string1, char *addition, char *final_string)
 	*ptr = '\0';
 	return (0);
 }
+
+/**
+ * get_cmd - Gets the users command
+ *
+ * @string: The string to extract the command from
+ *
+ * Return: int 0 on success, -1 on failure
+ */
+
+int get_cmd(char *string, char *cmd)
+{
+	char *token = NULL, *words = NULL;
+
+	if (string == NULL)
+		return (-1);
+	words = malloc(50 * sizeof(char));
+	if (words == NULL)
+		return (-1);
+	_strcpy(words, string);
+	token = _strt(words, " ");
+	if (token == NULL)
+	{
+		free(words);
+		return (-1);
+	}
+	_strcpy(cmd, token);
+	free(words);
+	return (0);
+}
 /**
  * _strlen - Returns length of a string
  * @str: A pointer to a char string
  * Return: length
  */
+
 size_t _strlen(const char *str)
 {
 	const char *ptr;
@@ -88,5 +98,31 @@ size_t _strlen(const char *str)
 		ptr++;
 	}
 	return ((size_t)(ptr - str));
-}
 
+}
+/**
+ * __strcat - Custom strcat function
+ * @dest: destination string
+ * @src: source string
+ * return: dest
+ */
+char *__strcat(char *dest, const char *src)
+{
+	char *ptr = dest;
+
+	if (dest == NULL || src == NULL)
+	{
+		return (dest);
+	}
+	while (*ptr != '\0')
+	{
+		ptr++;
+	}
+	while (*src != '\0')
+	{
+		*ptr++ = *src++;
+	}
+	*ptr = '\0';
+
+	return (dest);
+}

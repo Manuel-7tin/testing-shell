@@ -23,6 +23,16 @@ void ex_string(char **env, char *string, int* command_count)
 		free(path);
 		return;
 	}
+
+
+
+    if (strcmp(args[0], "cd") == 0)
+    {
+        // Handle 'cd' command
+        change_directory(args[1]);
+        return;  // Return after executing the built-in command
+    }
+
 	token = _strt(string, " ");
 	while (token != NULL)
 	{
@@ -30,8 +40,6 @@ void ex_string(char **env, char *string, int* command_count)
 		token = _strt(NULL, " ");
 	}
 	args[args_count] = NULL;
-
-        
 	pids = fork();
 	if (pids < 0)
 	{
