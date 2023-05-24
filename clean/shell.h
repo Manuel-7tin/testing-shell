@@ -17,6 +17,7 @@ void ex_string(char **env, char *string, int *command_count, char *file_name);
 char *_strt(char *string, const char *deli);
 int get_cmd(char *string, char *cmd);
 void handle_signal(int signal);
+char *__strcat(char *dest, const char *src);
 void _itoa(int value, char *str);
 size_t _strlen(const char *str);
 

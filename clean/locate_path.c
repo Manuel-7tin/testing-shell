@@ -144,12 +144,12 @@ int locate_path(char **env, char *cmd_path, char *cmd, int *command_count, char 
 	if (n == -1)
 	{
 		_itoa(*command_count, count_str);
-		strcpy(error_msg, file_name);
-		strcat(error_msg, ": ");
-		strcat(error_msg, count_str);
-		strcat(error_msg, ": ");
-		strcat(error_msg, cmd);
-		strcat(error_msg, ": not found\n");
+		_strcpy(error_msg, file_name);
+		__strcat(error_msg, ": ");
+		__strcat(error_msg, count_str);
+		__strcat(error_msg, ": ");
+		__strcat(error_msg, cmd);
+		__strcat(error_msg, ": not found\n");
 		write(STDERR_FILENO, error_msg, _strlen(error_msg));
 		return (-1);
 	}

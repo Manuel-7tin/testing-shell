@@ -102,3 +102,31 @@ size_t _strlen(const char *str)
 	return ((size_t)(ptr - str));
 
 }
+/**
+ * __strcat - custom strcat function
+ * @dest: destination string
+ * @src: source string
+ * Return: Dest
+ */
+char *__strcat(char *dest, const char *src)
+{
+	char *ptr = dest;
+
+	if (dest == NULL || src == NULL)
+	{
+		return (dest);
+	}
+	while (*ptr != '\0')
+	{
+		ptr++;
+	}
+
+	while (*src != '\0')
+	{
+		*ptr++ = *src++;
+	}
+
+	*ptr = '\0';
+
+	return (dest);
+}
