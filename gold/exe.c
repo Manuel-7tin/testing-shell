@@ -8,10 +8,11 @@
  *
  * Return: void
  */
-void ex_string(char **env, char *string, int *command_count)
+
+void ex_string(char **env, char *string, int *command_count, char *file_name)
 {
 	int i, status, args_count = 0;
-	char **args = malloc(4 * sizeof(char *));
+	char **args = malloc(MAX_STRING_LEN * sizeof(char *));
 	char *path, *token;
 	pid_t pids;
 
@@ -22,7 +23,6 @@ void ex_string(char **env, char *string, int *command_count)
 		free(path);
 		return;
 	}
-
 	token = _strt(string, " ");
 	while (token != NULL)
 	{
@@ -30,14 +30,6 @@ void ex_string(char **env, char *string, int *command_count)
 		token = _strt(NULL, " ");
 	}
 	args[args_count] = NULL;
-
-	for (i = 0; i <= args_count; i++)
-	{
-		if (args[i] == NULL)
-		{
-			break;
-		}
-	}
 	pids = fork();
 	if (pids < 0)
 	{
@@ -48,23 +40,24 @@ void ex_string(char **env, char *string, int *command_count)
 	}
 	else if (pids == 0)
 	{
-		i = locate_path(env, path, args[0], command_count);
+		i = locate_path(env, path, args[0], command_count, file_name);
 		if (i == -1)
 		{
+			perror(file_name);
 			free(path);
 			free(args);
-			exit(EXIT_SUCCESS);
+			exit(EXIT_FAILURE);
 		}
 		execve(path, args, env);
-				perror("execve");
-				free(path);
-				free(args);
-				exit(EXIT_SUCCESS);
+		perror("execve");
+		free(path);
+		free(args);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		waitpid(pids, &status, 0);
-		if (WIFSIGNALED(status))
+		if ((WTERMSIG(status)))
 		{
 			free(path);
 			free(args);

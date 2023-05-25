@@ -8,13 +8,9 @@
 
 void print_prompt(void)
 {
-	if (isatty(STDIN_FILENO))
-	{
-
 	char *prompt = "$ ";
 
-	write(STDOUT_FILENO, prompt, strlen(prompt));
-	}
+	write(STDOUT_FILENO, prompt, 2);
 }
 
 /**
@@ -30,10 +26,18 @@ int readline(char **str, FILE *stream)
 {
 	int char_num;
 	size_t input_size;
+	char *temp_str = NULL, *token = NULL;
 
-	char_num = getline(str, &input_size, stream);
-	if (str == NULL)
-		return (-5);
-	(*str)[char_num - 1] = '\0';
+	char_num = getline(&temp_str, &input_size, stream);
+	if (char_num != -1)
+		token = _strt(temp_str, "\n");
+	if (token != NULL)
+	{
+		*str = malloc(30);
+		if (*str == NULL)
+			return (char_num);
+		_strcpy(*str, token);
+	}
+	free(temp_str);
 	return (char_num);
 }
