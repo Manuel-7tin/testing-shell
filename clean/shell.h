@@ -20,6 +20,7 @@ void handle_signal(int signal);
 char *__strcat(char *dest, const char *src);
 void _itoa(int value, char *str);
 size_t _strlen(const char *str);
+int _strcmp(const char *str1, const char *str2);
 
 #define MAX_PATHS 7
 #define MAX_STRING_LEN 2048

@@ -69,7 +69,7 @@ int get_cmd(char *string, char *cmd)
 	if (words == NULL)
 		return (-1);
 	_strcpy(words, string);
-	token = strtok(words, " ");
+	token = _strt(words, " ");
 	if (token == NULL)
 	{
 		free(words);
