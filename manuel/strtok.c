@@ -1,11 +1,9 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+#include "shell.h"
 
 /*custom strtok function*/
-char *_strt(char *string, const char *deli)
+char *_strt(char *string, char *deli)
 {
-	int i, j, found;
+	int i, j, found, strize;
 	static char *next;
 	char *word = NULL;
 
@@ -14,13 +12,14 @@ char *_strt(char *string, const char *deli)
 		return (NULL);
 	}
 	if (string != NULL)
-	{
 		next = string;
-	}
-	if (next == NULL || *next == '\0')
-	{
+	strize = strlen(string);
+	if (deli == NULL)
 		return (NULL);
-	}
+	if (strize == strlen(deli) && str_cmp(string, deli, strize) == 0)
+		return (NULL);
+	if (next == NULL || *next == '\0' || deli == NULL)
+		return (NULL);
 	word = next;
 	i = 0;
 	found = 0;
